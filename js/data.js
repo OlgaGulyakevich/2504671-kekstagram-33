@@ -44,10 +44,20 @@ const generatePhoto = () => ({
   likes: getRandomInteger(LIKES_MIN, LIKES_MAX),
   comments: generateComments(),
 });
+// const generatePhoto = () => {
+//   const id = generatePhotoId();
+//   const url = `photos/${getRandomInteger(PHOTOS_MIN, PHOTOS_MAX)}.jpg`;
+//   const description = getRandomArrayElement(DESCRIPTIONS);
+//   const likes = getRandomInteger(LIKES_MIN, LIKES_MAX);
+//   const comments = generateComments();
+
+//   return { id, url, description, likes, comments };
+// };
+
 
 // Генерация массива фотографий
-const generatePhotoData = () => Array.from(
-  {length: PHOTO_DATA_COUNT},
+const generatePhotoData = (count = PHOTO_DATA_COUNT) => Array.from(
+  {length: count},
   generatePhoto);
 
 export { generatePhotoData };
