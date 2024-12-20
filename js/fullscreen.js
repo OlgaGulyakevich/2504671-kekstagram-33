@@ -62,7 +62,8 @@ const renderComments = () => {
 
   // Если комментариев нет
   if (loadedComments.length === 0) {
-    commentsCountBlock.innerHTML = 'Пока никто не оставил комментариев.';
+    commentsCountBlock.innerHTML = 'Пока никто не оставил комментариев...';
+    loadMoreButton.classList.add('hidden');
     return;
   }
 
