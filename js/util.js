@@ -18,8 +18,11 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 // Нажатие клавиши Escape
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+// Нажатие клавиши Enter
+const isEnterKey = (evt) => evt.key === 'Enter';
+
 // Переключение классов
-const toggleClass = (element, className = '') => {
+const toggleElementVisibility = (element, className = '') => {
   if(element) {
     element.classList.toggle(className);
   }
@@ -43,24 +46,23 @@ const getDeclineForm = (count, forms) => {
   if (mod100 >= 11 && mod100 <= 19) {
     return forms[2];
   }
-
   if (mod10 === 1) {
     return forms[0];
   }
-
   if (mod10 >= 2 && mod10 <= 4) {
     return forms[1];
   }
-
   return forms[2];
 };
+
 
 export {
   getIdGenerator,
   getRandomInteger,
   getRandomArrayElement,
   isEscapeKey,
-  toggleClass,
+  isEnterKey,
+  toggleElementVisibility,
   clearElement,
-  getDeclineForm
+  getDeclineForm,
 };
