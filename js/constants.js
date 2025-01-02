@@ -8,6 +8,29 @@ export const AVATAR_MAX = 6;
 export const COMMENTS_MIN = 0;
 export const COMMENTS_MAX = 30;
 
+export const COMMENTS_PER_PAGE = 5;
+
+export const MAX_HASHTAGS = 5;
+
+export const HASHTAG_REGEX = /^#[a-zA-Zа-яА-Я0-9]+$/;
+
+export const MAX_HASHTAG_LENGTH = 20;
+
+export const HASHTAG_ERROR_MESSAGES = {
+  START_WITH_HASH: 'Хэштег должен начинаться с символа #.',
+  START_ONLY_HASH: 'Хэштег не может состоять только из символа #.',
+  VALID_CHARACTERS: 'Хэштег должен состоять из букв и чисел.',
+  MAX_LENGTH: `Максимальная длина хэштега — ${MAX_HASHTAG_LENGTH} символов, включая #.`,
+  UNIQUE: 'Хэштеги не должны повторяться.',
+  MAX_COUNT: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов.`
+};
+
+export const FILE_TYPE_ERROR_MESSAGES = {
+  VALID_TYPE: 'Неверный формат файла! Выберите: JPG, JPEG, PNG, BMP или WEBP'
+};
+
+export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
+
 export const NAMES = [
   'Настя_yellow',
   'Kate',

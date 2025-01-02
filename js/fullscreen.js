@@ -1,10 +1,6 @@
-import {
-  isEscapeKey,
-  toggleClass,
-  clearElement,
-  getDeclineForm } from './util.js';
+import { isEscapeKey, toggleElementVisibility, clearElement, getDeclineForm } from './util.js';
+import { COMMENTS_PER_PAGE } from './constants.js';
 
-const COMMENTS_PER_PAGE = 5;
 
 const fullscreenBlock = document.querySelector('.big-picture');
 const fullscreenPhoto = fullscreenBlock.querySelector('.big-picture__img img');
@@ -67,7 +63,7 @@ const renderComments = () => {
     return;
   }
 
-  // Скрываем кнопку, если все комментарии показаны
+  // Скрывает кнопку, если все комментарии показаны
   loadMoreButton.classList.toggle('hidden', displayedCommentsCount >= loadedComments.length);
 };
 
@@ -101,27 +97,27 @@ const onEscKeydown = (evt) => {
   }
 };
 
-// Обработчик закрытия полноэкранного просмотра
+// Закрывает полноэкранный просмотр
 function onCloseButtonClick () {
-  toggleClass (fullscreenBlock, 'hidden');
-  toggleClass (document.body, 'modal-open');
+  toggleElementVisibility (fullscreenBlock, 'hidden');
+  toggleElementVisibility (document.body, 'modal-open');
 
   loadMoreButton.removeEventListener('click', onLoadMoreButtonClick);
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onEscKeydown);
 }
 
-// Обработчик открытия полноэкранного просмотра
-const onThumbnailClick = (evt, thumbnail) => {
+// Открывает полноэкранный просмотр
+function onThumbnailClick (evt, thumbnail) {
   evt.preventDefault();
   fillPhotoData(thumbnail);
 
-  toggleClass(fullscreenBlock, 'hidden');
-  toggleClass(document.body, 'modal-open');
+  toggleElementVisibility (fullscreenBlock, 'hidden');
+  toggleElementVisibility (document.body, 'modal-open');
 
   loadMoreButton.addEventListener('click', onLoadMoreButtonClick);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onEscKeydown);
-};
+}
 
 export { onThumbnailClick };
