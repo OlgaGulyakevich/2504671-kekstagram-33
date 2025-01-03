@@ -1,16 +1,18 @@
 import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './pristine.js';
 import { isEscapeKey, isEnterKey } from './util.js';
+import { initScale, resetScale } from './scale.js';
 
 
 const overlay = uploadForm.querySelector('.img-upload__overlay');
 const closeButton = uploadForm.querySelector('#upload-cancel');
 // const submitButton = uploadForm.querySelector('#upload-submit');
 
-hashtagsInput.addEventListener('keydown', (evt) => {
-  evt.stopPropagation();
-});
-descriptionInput.addEventListener('keydown', (evt) => {
-  evt.stopPropagation();
+const dataInputs = [hashtagsInput, descriptionInput];
+
+dataInputs.forEach((input) => {
+  input.addEventListener('keydown', (evt) => {
+    evt.stopPropagation();
+  });
 });
 
 
@@ -23,6 +25,7 @@ function onCloseButtonClick() {
   resetValidation();
   uploadForm.reset();
   fileInput.value = '';
+  resetScale();
 
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -60,6 +63,7 @@ function initUploadForm() {
   document.addEventListener('keydown', onEscKeydown);
 
   initPristine();
+  initScale();
 
   hashtagsInput.addEventListener('keydown', onEnterKeydown);
   descriptionInput.addEventListener('keydown', onEnterKeydown);
@@ -67,5 +71,3 @@ function initUploadForm() {
 }
 
 initUploadForm();
-
-

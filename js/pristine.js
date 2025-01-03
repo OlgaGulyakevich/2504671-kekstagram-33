@@ -4,7 +4,6 @@ import { FILE_TYPES, FILE_TYPE_ERROR_MESSAGES } from './constants.js';
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const descriptionInput = uploadForm.querySelector('.text__description');
-
 const fileInput = uploadForm.querySelector('#upload-file');
 
 const pristineConfig = {
@@ -42,7 +41,6 @@ function addValidationRules() {
     },
     FILE_TYPE_ERROR_MESSAGES.VALID_TYPE
   );
-
 
   hashtagsInput.addEventListener('input', () => {
     pristine.validate(hashtagsInput);

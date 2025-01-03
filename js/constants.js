@@ -31,6 +31,11 @@ export const FILE_TYPE_ERROR_MESSAGES = {
 
 export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
 
+export const SCALE_STEP = 25;
+export const SCALE_MIN = 25;
+export const SCALE_MAX = 100;
+export const SCALE_DEFAULT = 100;
+
 export const NAMES = [
   'Настя_yellow',
   'Kate',
