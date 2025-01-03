@@ -1,6 +1,7 @@
 import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './pristine.js';
 import { isEscapeKey, isEnterKey } from './util.js';
 import { initScale, resetScale } from './scale.js';
+import { initEffects, resetEffects } from './effects.js';
 
 
 const overlay = uploadForm.querySelector('.img-upload__overlay');
@@ -9,23 +10,28 @@ const closeButton = uploadForm.querySelector('#upload-cancel');
 
 const dataInputs = [hashtagsInput, descriptionInput];
 
-dataInputs.forEach((input) => {
-  input.addEventListener('keydown', (evt) => {
-    evt.stopPropagation();
-  });
-});
+function onDataInputsKeydown(evt) {
+  evt.stopPropagation();
+  if (isEnterKey(evt)) {
+    evt.preventDefault();
+  }
+}
 
-
-const onFileInputChange = () => {
+function onFileInputChange () {
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-};
+
+  initScale();
+  initEffects();
+}
 
 function onCloseButtonClick() {
   resetValidation();
   uploadForm.reset();
   fileInput.value = '';
+
   resetScale();
+  resetEffects();
 
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -34,8 +40,7 @@ function onCloseButtonClick() {
   uploadForm.removeEventListener('submit', onFormSubmit);
   fileInput.removeEventListener('change', onFileInputChange);
   document.removeEventListener('keydown', onEscKeydown);
-  hashtagsInput.removeEventListener('keydown', onEnterKeydown);
-  descriptionInput.removeEventListener('keydown', onEnterKeydown);
+  dataInputs.removeEventListener('keydown', onDataInputsKeydown);
 }
 
 function onEscKeydown (evt) {
@@ -45,13 +50,7 @@ function onEscKeydown (evt) {
   }
 }
 
-function onEnterKeydown (evt) {
-  if (isEnterKey(evt)) {
-    evt.preventDefault();
-  }
-}
-
-function onFormSubmit(evt) {
+function onFormSubmit (evt) {
   if (!validateForm()) {
     evt.preventDefault();
   }
@@ -63,10 +62,8 @@ function initUploadForm() {
   document.addEventListener('keydown', onEscKeydown);
 
   initPristine();
-  initScale();
 
-  hashtagsInput.addEventListener('keydown', onEnterKeydown);
-  descriptionInput.addEventListener('keydown', onEnterKeydown);
+  dataInputs.addEventListener('keydown', onDataInputsKeydown);
   uploadForm.addEventListener('submit', onFormSubmit);
 }
 
