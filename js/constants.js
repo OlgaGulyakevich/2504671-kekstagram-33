@@ -31,6 +31,71 @@ export const FILE_TYPE_ERROR_MESSAGES = {
 
 export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
 
+export const SCALE_STEP = 25;
+export const SCALE_MIN = 25;
+export const SCALE_MAX = 100;
+export const SCALE_DEFAULT = 100;
+
+export const HIDDEN_CLASS = 'hidden';
+
+export const EFFECTS = {
+  none: {
+    name: 'none',
+    style: 'none',
+    min: 0,
+    max: 100,
+    start: 100,
+    step: 1,
+    unit: ''
+  },
+  chrome: {
+    name: 'chrome',
+    style: 'grayscale',
+    min: 0,
+    max: 1,
+    start: 1,
+    step: 0.1,
+    unit: ''
+  },
+  sepia: {
+    name: 'sepia',
+    style: 'sepia',
+    min: 0,
+    max: 1,
+    start: 1,
+    step: 0.1,
+    unit: ''
+  },
+  marvin: {
+    name: 'marvin',
+    style: 'invert',
+    min: 0,
+    max: 100,
+    start: 100,
+    step: 1,
+    unit: '%'
+  },
+  phobos: {
+    name: 'phobos',
+    style: 'blur',
+    min: 0,
+    max: 3,
+    start: 3,
+    step: 0.1,
+    unit: 'px'
+  },
+  heat: {
+    name: 'heat',
+    style: 'brightness',
+    min: 1,
+    max: 3,
+    start: 3,
+    step: 0.1,
+    unit: ''
+  }
+};
+
+
 export const NAMES = [
   'Настя_yellow',
   'Kate',
