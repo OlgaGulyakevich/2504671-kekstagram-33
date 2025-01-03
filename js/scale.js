@@ -16,19 +16,13 @@ function updateScaleUI() {
 
 // Уменьшаем масштаб
 function onSmallerButtonClick() {
-  currentScale = currentScale - SCALE_STEP;
-  if (currentScale < SCALE_MIN) {
-    currentScale = SCALE_MIN;
-  }
+  currentScale = Math.max(currentScale - SCALE_STEP, SCALE_MIN);
   updateScaleUI();
 }
 
 // Увеличиваем масштаб
 function onBiggerButtonClick() {
-  currentScale = currentScale + SCALE_STEP;
-  if (currentScale > SCALE_MAX) {
-    currentScale = SCALE_MAX;
-  }
+  currentScale = Math.min(currentScale + SCALE_STEP, SCALE_MAX);
   updateScaleUI();
 }
 

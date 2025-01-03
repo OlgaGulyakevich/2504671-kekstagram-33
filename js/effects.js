@@ -73,15 +73,16 @@ function onEffectChange(evt) {
 
 
 function resetEffects() {
+  if (sliderElement.noUiSlider) {
+    sliderElement.noUiSlider.destroy();
+  }
+
+  effectsList.removeEventListener('change', onEffectChange);
+
   currentEffect = EFFECTS.none;
   previewImg.style.filter = 'none';
   effectLevelValue.value = '';
   sliderContainer.classList.add(HIDDEN_CLASS);
-  sliderElement.noUiSlider.updateOptions({
-    range: { min: 0, max: 100 },
-    start: 100,
-    step: 1
-  });
 }
 
 // Инициализация

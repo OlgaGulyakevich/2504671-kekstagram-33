@@ -36,12 +36,14 @@ function onCloseButtonClick() {
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  closeButton.removeEventListener('click', onCloseButtonClick);
   uploadForm.removeEventListener('submit', onFormSubmit);
-  fileInput.removeEventListener('change', onFileInputChange);
   document.removeEventListener('keydown', onEscKeydown);
-  dataInputs.removeEventListener('keydown', onDataInputsKeydown);
+
+  dataInputs.forEach((input) => {
+    input.removeEventListener('keydown', onDataInputsKeydown);
+  });
 }
+
 
 function onEscKeydown (evt) {
   if (isEscapeKey(evt)) {
@@ -63,7 +65,10 @@ function initUploadForm() {
 
   initPristine();
 
-  dataInputs.addEventListener('keydown', onDataInputsKeydown);
+  dataInputs.forEach((input) => {
+    input.addEventListener('keydown', onDataInputsKeydown);
+  });
+
   uploadForm.addEventListener('submit', onFormSubmit);
 }
 
