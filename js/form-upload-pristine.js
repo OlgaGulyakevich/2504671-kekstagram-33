@@ -1,5 +1,4 @@
 import { validateHashtags } from './hashtags.js';
-import { FILE_TYPES, FILE_TYPE_ERROR_MESSAGES } from './constants.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
@@ -27,19 +26,6 @@ function addValidationRules() {
     hashtagsInput,
     (value) => validateHashtags(value).valid,
     (value) => validateHashtags(value).error
-  );
-
-  pristine.addValidator(
-    fileInput,
-    () => {
-      const file = fileInput.files[0];
-      if (!file) {
-        return true;
-      }
-      const fileName = file.name.toLowerCase();
-      return FILE_TYPES.some((ext) => fileName.endsWith(ext));
-    },
-    FILE_TYPE_ERROR_MESSAGES.VALID_TYPE
   );
 
   hashtagsInput.addEventListener('input', () => {

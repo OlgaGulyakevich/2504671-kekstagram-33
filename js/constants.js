@@ -25,12 +25,6 @@ export const HASHTAG_ERROR_MESSAGES = {
   MAX_COUNT: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов.`
 };
 
-export const FILE_TYPE_ERROR_MESSAGES = {
-  VALID_TYPE: 'Неверный формат файла! Выберите: JPG, JPEG, PNG, BMP или WEBP'
-};
-
-export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
-
 export const SCALE_STEP = 25;
 export const SCALE_MIN = 25;
 export const SCALE_MAX = 100;

@@ -1,5 +1,6 @@
 import { isEscapeKey, toggleElementVisibility, clearElement, getDeclineForm } from './util.js';
 import { COMMENTS_PER_PAGE } from './constants.js';
+import { initComment, destroyComment } from './form-comments-fullscreen.js';
 
 
 const fullscreenBlock = document.querySelector('.big-picture');
@@ -16,7 +17,7 @@ const loadMoreButton = fullscreenBlock.querySelector('.comments-loader');
 
 let loadedComments = [];
 let displayedCommentsCount = 0;
-
+let hasUserLiked = false;
 
 // Создает один комментарий
 const createComment = ({ avatar, name, message }) => {
@@ -35,7 +36,7 @@ const createComment = ({ avatar, name, message }) => {
 };
 
 
-// Отрисовывает комментарии
+//  Отрисовывает одну «порцию» комментариев
 const renderComments = () => {
   const fragment = document.createDocumentFragment();
 
@@ -47,10 +48,11 @@ const renderComments = () => {
 
   commentsList.append(fragment);
 
-  //Обновляет количество комментариев с учетом склонения
+  //Обновляет счетчик комментариев
   displayedCommentsCount += nextComments.length;
   shownCommentsCount.textContent = displayedCommentsCount;
 
+  // Склоняет «комментарий/комментария/комментариев»
   const commentWord = getDeclineForm(displayedCommentsCount, ['комментарий', 'комментария', 'комментариев']);
   commentsCountBlock.innerHTML =
   ` <span class="social__comment-shown-count">${displayedCommentsCount}</span> из
@@ -67,8 +69,15 @@ const renderComments = () => {
   loadMoreButton.classList.toggle('hidden', displayedCommentsCount >= loadedComments.length);
 };
 
+// При клике на лайк (один раз)
+function onLikesClick() {
+  if (!hasUserLiked) {
+    likesCount.textContent = Number(likesCount.textContent) + 1;
+    hasUserLiked = true;
+  }
+}
 
-// Заполняет информацию о фотографии
+// Заполняет данные о фото
 const fillPhotoData = ({url, likes, description, comments}) => {
   fullscreenPhoto.src = url;
   fullscreenPhoto.alt = description;
@@ -83,40 +92,53 @@ const fillPhotoData = ({url, likes, description, comments}) => {
   renderComments(comments);
 };
 
-// Обработчик загрузки дополнительных комментариев
-const onLoadMoreButtonClick = (evt) => {
+// Клик по кнопке «Загрузить ещё»
+function onLoadMoreButtonClick(evt) {
   evt.preventDefault();
   renderComments();
-};
+}
 
-// Обработчик нажатия клавиши ESC
-const onEscKeydown = (evt) => {
+// Клавиша Esc
+function onEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     onCloseButtonClick();
   }
-};
+}
 
-// Закрывает полноэкранный просмотр
-function onCloseButtonClick () {
-  toggleElementVisibility (fullscreenBlock, 'hidden');
-  toggleElementVisibility (document.body, 'modal-open');
+
+// Закрывает полноэкранный просмотр фото
+function onCloseButtonClick() {
+  toggleElementVisibility(fullscreenBlock, 'hidden');
+  toggleElementVisibility(document.body, 'modal-open');
+
+  // Убираем «комментарии»
+  destroyComment();
 
   loadMoreButton.removeEventListener('click', onLoadMoreButtonClick);
   closeButton.removeEventListener('click', onCloseButtonClick);
+  likesCount.removeEventListener('click', onLikesClick);
   document.removeEventListener('keydown', onEscKeydown);
+
+  // Сброс лайка при закрытии
+  hasUserLiked = false;
 }
 
-// Открывает полноэкранный просмотр
-function onThumbnailClick (evt, thumbnail) {
-  evt.preventDefault();
-  fillPhotoData(thumbnail);
 
-  toggleElementVisibility (fullscreenBlock, 'hidden');
-  toggleElementVisibility (document.body, 'modal-open');
+// Открывает полноэкранный просмотр
+function onThumbnailClick(evt, thumbnailData) {
+  evt.preventDefault();
+  fillPhotoData(thumbnailData);
+
+  toggleElementVisibility(fullscreenBlock, 'hidden');
+  toggleElementVisibility(document.body, 'modal-open');
+
+  // Инициализация формы комментариев
+  initComment();
 
   loadMoreButton.addEventListener('click', onLoadMoreButtonClick);
   closeButton.addEventListener('click', onCloseButtonClick);
+  likesCount.addEventListener('click', onLikesClick);
   document.addEventListener('keydown', onEscKeydown);
 }
 

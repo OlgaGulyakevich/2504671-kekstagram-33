@@ -174,17 +174,16 @@
           <button type="button" class="social__comments-loader  comments-loader">Загрузить еще</button>
 
           <!-- Форма для отправки комментария -->
-          <div class="social__footer">
+          <form class="social__footer social__footer-form">
             <img class="social__picture" src="img/avatar-6.svg" alt="Аватар комментатора фотографии" width="35" height="35">
-            <!-- <div class="social__footer-wrapper"></div> Для pristine -->
-            <input type="text" class="social__footer-text" placeholder="Ваш комментарий...">
-            <button type="button" class="social__footer-btn" name="button">Отправить</button>
-          </div>
-        </div>
+            <!-- <div class="social__footer-wrapper hidden"> </div> -->
+            <input type="text" class="social__footer-text" placeholder="Ваш комментарий..." data-pristine-maxlength="140" data-pristine-maxlength-message="Длина комментария не должна превышать 140 символов.">
+            <button type="submit" class="social__footer-btn">Отправить</button>
+          </form>
 
-        <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
-        <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel">Закрыть</button>
-      </div>
+          <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
+          <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel">Закрыть</button>
+        </div>
     </section>
   </main>
 
