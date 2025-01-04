@@ -710,7 +710,8 @@ main {
   border-radius: 5px;
 }
 
-.img-upload__field-wrapper--error {
+.img-upload__field-wrapper--error,
+social__footer-wrapper--error {
   background-color: #fd4d4b;
   color:#ffffff;
   font-size: 12px;
@@ -1043,8 +1044,11 @@ main {
 
 .social__footer-text {
   width: 100%;
-
   border: none;
+  padding: 10px 40px 10px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .social__footer-btn {
