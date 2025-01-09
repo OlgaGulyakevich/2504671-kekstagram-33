@@ -6,7 +6,7 @@ import { initEffects, resetEffects } from './effects.js';
 
 const overlay = uploadForm.querySelector('.img-upload__overlay');
 const closeButton = uploadForm.querySelector('#upload-cancel');
-// const submitButton = uploadForm.querySelector('#upload-submit');
+const submitButton = uploadForm.querySelector('#upload-submit');
 
 const dataInputs = [hashtagsInput, descriptionInput];
 

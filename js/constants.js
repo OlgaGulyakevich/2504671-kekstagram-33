@@ -32,8 +32,9 @@ export const SubmitButtonText = {
   SENDING: 'ПУБЛИКУЮ...'
 };
 
-
 export const FileTypes = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
+
+export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export const COMMENTS_PER_PAGE = 5;
 
@@ -43,13 +44,18 @@ export const HASHTAG_REGEX = /^#[a-zA-Zа-яА-Я0-9]+$/;
 
 export const MAX_HASHTAG_LENGTH = 20;
 
-export const HASHTAG_ERROR_MESSAGES = {
+export const HashtagErrorMessages = {
   START_WITH_HASH: 'Хэштег должен начинаться с символа #.',
   START_ONLY_HASH: 'Хэштег не может состоять только из символа #.',
   VALID_CHARACTERS: 'Хэштег должен состоять из букв и чисел.',
   MAX_LENGTH: `Максимальная длина хэштега — ${MAX_HASHTAG_LENGTH} символов, включая #.`,
   UNIQUE: 'Хэштеги не должны повторяться.',
   MAX_COUNT: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов.`
+};
+
+export const FileErrorMessages = {
+  INVALID_TYPE: 'Недопустимый формат файла.',
+  MAX_SIZE: 'Файл слишком большой (максимум 5 мб)',
 };
 
 export const SCALE_STEP = 25;
