@@ -1,4 +1,5 @@
 import { validateHashtags } from './hashtags.js';
+import { validateSubmitFile} from './file-input-validation.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
@@ -18,35 +19,40 @@ let pristine;
 function initPristine() {
   pristine = new Pristine (uploadForm, pristineConfig, false);
   addValidationRules();
-  addEventListeners();
 }
 
 function addValidationRules() {
+
+  // Валидация хэштегов
   pristine.addValidator(
     hashtagsInput,
     (value) => validateHashtags(value).valid,
     (value) => validateHashtags(value).error
   );
 
-  hashtagsInput.addEventListener('input', () => {
-    pristine.validate(hashtagsInput);
-  });
+  // Общая валидации при вводе или потере фокуса
+  const attachValidation = (input) => {
+    input.addEventListener('input', () => pristine.validate(input));
+    input.addEventListener('blur', () => pristine.validate(input));
+  };
+  [hashtagsInput, descriptionInput].forEach(attachValidation);
 
-  descriptionInput.addEventListener('input', () => {
-    pristine.validate(descriptionInput);
-  });
-
+  // Валидация файла
+  pristine.addValidator(
+    fileInput,
+    () => {
+      const formData = new FormData(uploadForm);
+      const fileValidationResult = validateSubmitFile(formData);
+      return fileValidationResult.valid;
+    },
+    () => {
+      const formData = new FormData(uploadForm);
+      const fileValidationResult = validateSubmitFile(formData);
+      return fileValidationResult.error;
+    }
+  );
 }
 
-function addEventListeners() {
-  hashtagsInput.addEventListener('blur', () => {
-    pristine.validate(hashtagsInput);
-  });
-
-  descriptionInput.addEventListener('blur', () => {
-    pristine.validate(descriptionInput);
-  });
-}
 
 function validateForm() {
   return pristine.validate();

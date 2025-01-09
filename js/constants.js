@@ -8,6 +8,34 @@ export const AVATAR_MAX = 6;
 export const COMMENTS_MIN = 0;
 export const COMMENTS_MAX = 30;
 
+export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
+
+export const Route = {
+  GET_DATA: '/data',
+  SEND_COMMENTS: '/',
+  SEND_DATA: '/',
+};
+export const Method = {
+  GET: 'GET',
+  POST: 'POST',
+};
+export const ErrorText = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+  SEND_COMMENTS: 'Не удалось отправить комментарий. Попробуйте ещё раз',
+};
+
+export const ALERT_SHOW_TIME = 5000;
+
+export const SubmitButtonText = {
+  IDLE: 'ОПУБЛИКОВАТЬ',
+  SENDING: 'ПУБЛИКУЮ...'
+};
+
+export const FileTypes = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
+
+export const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
 export const COMMENTS_PER_PAGE = 5;
 
 export const MAX_HASHTAGS = 5;
@@ -16,13 +44,18 @@ export const HASHTAG_REGEX = /^#[a-zA-Zа-яА-Я0-9]+$/;
 
 export const MAX_HASHTAG_LENGTH = 20;
 
-export const HASHTAG_ERROR_MESSAGES = {
+export const HashtagErrorMessages = {
   START_WITH_HASH: 'Хэштег должен начинаться с символа #.',
   START_ONLY_HASH: 'Хэштег не может состоять только из символа #.',
   VALID_CHARACTERS: 'Хэштег должен состоять из букв и чисел.',
   MAX_LENGTH: `Максимальная длина хэштега — ${MAX_HASHTAG_LENGTH} символов, включая #.`,
   UNIQUE: 'Хэштеги не должны повторяться.',
   MAX_COUNT: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов.`
+};
+
+export const FileErrorMessages = {
+  INVALID_TYPE: 'Недопустимый формат файла.',
+  MAX_SIZE: 'Файл слишком большой (максимум 5 мб)',
 };
 
 export const SCALE_STEP = 25;
