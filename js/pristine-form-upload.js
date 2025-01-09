@@ -18,7 +18,6 @@ let pristine;
 function initPristine() {
   pristine = new Pristine (uploadForm, pristineConfig, false);
   addValidationRules();
-  addEventListeners();
 }
 
 function addValidationRules() {
@@ -28,25 +27,14 @@ function addValidationRules() {
     (value) => validateHashtags(value).error
   );
 
-  hashtagsInput.addEventListener('input', () => {
-    pristine.validate(hashtagsInput);
-  });
-
-  descriptionInput.addEventListener('input', () => {
-    pristine.validate(descriptionInput);
-  });
-
+  // Общая функция для валидации при вводе или потере фокуса
+  const attachValidation = (input) => {
+    input.addEventListener('input', () => pristine.validate(input));
+    input.addEventListener('blur', () => pristine.validate(input));
+  };
+  [hashtagsInput, descriptionInput].forEach(attachValidation);
 }
 
-function addEventListeners() {
-  hashtagsInput.addEventListener('blur', () => {
-    pristine.validate(hashtagsInput);
-  });
-
-  descriptionInput.addEventListener('blur', () => {
-    pristine.validate(descriptionInput);
-  });
-}
 
 function validateForm() {
   return pristine.validate();

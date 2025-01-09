@@ -1,4 +1,4 @@
-import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './form-upload-pristine.js';
+import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './pristine-form-upload.js';
 import { isEscapeKey, isEnterKey } from './util.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';
@@ -52,11 +52,38 @@ function onEscKeydown (evt) {
   }
 }
 
-function onFormSubmit (evt) {
-  if (!validateForm()) {
-    evt.preventDefault();
-  }
-}
+// const blockSubmitButton = () => {
+//   submitButton.disabled = true;
+//   submitButton.textContent = SubmitButtonText.SENDING;
+// };
+
+// const unblockSubmitButton = () => {
+//   submitButton.disabled = false;
+//   submitButton.textContent = SubmitButtonText.IDLE;
+// };
+
+// const SubmitButtonText = {
+//   IDLE: 'Отправить',
+//   SENDING: 'Отправляю...'
+// };
+
+// function onFormSubmit (evt) {
+//   evt.preventDefault();
+
+//   if (!validateForm()) {
+//     if (isValid) {
+//       blockSubmitButton();
+//       sendData(new FormData(evt.target))
+//         .then(onSuccess)
+//         .catch(
+//           (err) => {
+//             showAlert(err.message);
+//           }
+//         )
+//         .finally(unblockSubmitButton);
+//     }
+//   }
+// }
 
 function initUploadForm() {
   fileInput.addEventListener('change', onFileInputChange);

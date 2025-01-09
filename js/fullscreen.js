@@ -1,6 +1,6 @@
 import { isEscapeKey, toggleElementVisibility, clearElement, getDeclineForm } from './util.js';
 import { COMMENTS_PER_PAGE } from './constants.js';
-import { initComment, destroyComment } from './form-comments-fullscreen.js';
+import { initComment, destroyComment } from './form-comments.js';
 
 
 const fullscreenBlock = document.querySelector('.big-picture');

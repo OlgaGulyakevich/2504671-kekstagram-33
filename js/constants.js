@@ -8,6 +8,33 @@ export const AVATAR_MAX = 6;
 export const COMMENTS_MIN = 0;
 export const COMMENTS_MAX = 30;
 
+export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
+
+export const Route = {
+  GET_DATA: '/data',
+  GET_COMMENTS: '/comments',
+  SEND_DATA: '/',
+};
+export const Method = {
+  GET: 'GET',
+  POST: 'POST',
+};
+export const ErrorText = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+  SEND_COMMENTS: 'Не удалось отправить комментарий. Попробуйте ещё раз',
+};
+
+export const ALERT_SHOW_TIME = 5000;
+
+export const SubmitButtonText = {
+  IDLE: 'ОПУБЛИКОВАТЬ',
+  SENDING: 'ПУБЛИКУЮ...'
+};
+
+
+export const FileTypes = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
+
 export const COMMENTS_PER_PAGE = 5;
 
 export const MAX_HASHTAGS = 5;
