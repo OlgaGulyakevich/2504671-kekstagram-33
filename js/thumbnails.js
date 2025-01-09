@@ -1,6 +1,6 @@
 import { onThumbnailClick } from './fullscreen.js';
 import {getData} from './api.js';
-import {showDataError} from './show-allert.js';
+import {showDataError} from './show-alert.js';
 
 const pictureContainer = document.querySelector('.pictures');
 
