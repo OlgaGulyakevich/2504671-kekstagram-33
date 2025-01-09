@@ -20,4 +20,6 @@ const getData = async () => await load(Route.GET_DATA, ErrorText.GET_DATA);
 
 const sendData = async (body) => await load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
 
-export {getData, sendData};
+const sendСomments = async (body) => await load(Route.SEND_COMMENTS, ErrorText.SEND_COMMENTS, Method.POST, body);
+
+export {getData, sendData, sendСomments};

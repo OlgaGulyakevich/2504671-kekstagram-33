@@ -1,4 +1,4 @@
-import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './pristine-form-upload.js';
+import { initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput } from './form-upload-validation.js';
 import { isEscapeKey, isEnterKey } from './util.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';

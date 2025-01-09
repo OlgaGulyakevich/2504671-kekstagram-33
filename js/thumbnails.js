@@ -1,4 +1,8 @@
 import { onThumbnailClick } from './fullscreen.js';
+import {getData} from './api.js';
+import {showDataError} from './show-allert.js';
+
+const pictureContainer = document.querySelector('.pictures');
 
 // Создает миниатюру фотографии на основе данных
 const createThumbnail = ({ url, description, likes, comments }) => {
@@ -39,4 +43,13 @@ const renderThumbnails = (container, photos) => {
   container.append(fragment);
 };
 
-export { renderThumbnails };
+async function loadPhotos() {
+  try {
+    const data = await getData();
+    renderThumbnails(pictureContainer, data);
+  } catch (error) {
+    showDataError();
+  }
+}
+
+export { loadPhotos };

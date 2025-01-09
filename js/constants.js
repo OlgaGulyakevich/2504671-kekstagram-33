@@ -12,7 +12,7 @@ export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
 export const Route = {
   GET_DATA: '/data',
-  GET_COMMENTS: '/comments',
+  SEND_COMMENTS: '/',
   SEND_DATA: '/',
 };
 export const Method = {
