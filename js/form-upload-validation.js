@@ -1,5 +1,4 @@
 import { validateHashtags } from './hashtags.js';
-import { validateSubmitFile} from './file-input-validation.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
@@ -36,31 +35,17 @@ function addValidationRules() {
     input.addEventListener('blur', () => pristine.validate(input));
   };
   [hashtagsInput, descriptionInput].forEach(attachValidation);
-
-  // Валидация файла
-  pristine.addValidator(
-    fileInput,
-    () => {
-      const formData = new FormData(uploadForm);
-      const fileValidationResult = validateSubmitFile(formData);
-      return fileValidationResult.valid;
-    },
-    () => {
-      const formData = new FormData(uploadForm);
-      const fileValidationResult = validateSubmitFile(formData);
-      return fileValidationResult.error;
-    }
-  );
 }
 
 
 function validateForm() {
+  initPristine();
   return pristine.validate();
 }
 
-function resetValidation() {
+function resetFormValidation() {
   pristine.reset();
 }
 
 
-export {initPristine, validateForm, resetValidation, uploadForm, hashtagsInput, descriptionInput, fileInput};
+export {validateForm, resetFormValidation, uploadForm, hashtagsInput, descriptionInput, fileInput};

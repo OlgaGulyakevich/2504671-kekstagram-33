@@ -1,4 +1,4 @@
-import {loadPhotos} from './thumbnails.js';
+import './thumbnails.js';
 import './form-upload.js';
 
-loadPhotos();
+

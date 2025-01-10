@@ -1,6 +1,6 @@
 import { onThumbnailClick } from './fullscreen.js';
 import {getData} from './api.js';
-import {showDataError} from './show-alert.js';
+import {showDataError} from './show-alerts.js';
 
 const pictureContainer = document.querySelector('.pictures');
 
@@ -43,7 +43,7 @@ const renderThumbnails = (container, photos) => {
   container.append(fragment);
 };
 
-async function loadPhotos() {
+async function getPhotos() {
   try {
     const data = await getData();
     renderThumbnails(pictureContainer, data);
@@ -52,4 +52,4 @@ async function loadPhotos() {
   }
 }
 
-export { loadPhotos };
+getPhotos();

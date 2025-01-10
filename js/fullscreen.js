@@ -17,7 +17,7 @@ const loadMoreButton = fullscreenBlock.querySelector('.comments-loader');
 
 let loadedComments = [];
 let displayedCommentsCount = 0;
-let hasUserLiked = false;
+let isLiked = false;
 
 // Создает один комментарий
 const createComment = ({ avatar, name, message }) => {
@@ -71,9 +71,9 @@ const renderComments = () => {
 
 // При клике на лайк (один раз)
 function onLikesClick() {
-  if (!hasUserLiked) {
+  if (!isLiked) {
     likesCount.textContent = Number(likesCount.textContent) + 1;
-    hasUserLiked = true;
+    isLiked = true;
   }
 }
 
@@ -121,7 +121,7 @@ function onCloseButtonClick() {
   document.removeEventListener('keydown', onEscKeydown);
 
   // Сброс лайка при закрытии
-  hasUserLiked = false;
+  isLiked = false;
 }
 
 

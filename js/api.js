@@ -1,4 +1,8 @@
-import { BASE_URL, Route, Method, ErrorText} from './constants';
+import {
+  BASE_URL,
+  Route,
+  Method,
+  ErrorText } from './constants';
 
 
 async function load (route, errorText, method = Method.GET, body = null) {

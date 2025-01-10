@@ -48,9 +48,6 @@ function showError() {
 
 // Функция для показа ошибки при загрузке данных (getData)
 function showDataError() {
-  // Тут чаще делают что-то попроще (например, баннер сверху)
-  // Или пользуются тем же showModal
-  // Но раз у вас шаблон #data-error, можно:
   const template = document.querySelector('#data-error').content.cloneNode(true);
   const container = template.querySelector('.data-error');
 

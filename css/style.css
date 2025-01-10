@@ -720,6 +720,13 @@ main {
   position: relative;
 }
 
+.social__footer-wrapper--error {
+  width: 400px;
+  height: 20px;
+  text-align: center;
+  margin-left: -362px;
+}
+
 
 /**
  * Кнопка для отправки изображения

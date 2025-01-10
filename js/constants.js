@@ -12,8 +12,8 @@ export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
 export const Route = {
   GET_DATA: '/data',
-  SEND_COMMENTS: '/',
-  SEND_DATA: '/',
+  SEND_COMMENTS: '',
+  SEND_DATA: '',
 };
 export const Method = {
   GET: 'GET',
@@ -31,8 +31,6 @@ export const SubmitButtonText = {
   IDLE: 'ОПУБЛИКОВАТЬ',
   SENDING: 'ПУБЛИКУЮ...'
 };
-
-export const FileTypes = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
 
 export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -54,7 +52,6 @@ export const HashtagErrorMessages = {
 };
 
 export const FileErrorMessages = {
-  INVALID_TYPE: 'Недопустимый формат файла.',
   MAX_SIZE: 'Файл слишком большой (максимум 5 мб)',
 };
 
