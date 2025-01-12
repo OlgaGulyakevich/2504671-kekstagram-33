@@ -1,3 +1,9 @@
+import { isEscapeKey } from './util.js';
+import { SubmitButtonText } from './constants.js';
+import { sendData } from './api.js';
+import { showError, showSuccess } from './show-alerts.js';
+import { initScale, resetScale } from './scale.js';
+import { initEffects, resetEffects } from './effects.js';
 import {
   validateForm,
   resetFormValidation,
@@ -7,12 +13,6 @@ import {
   fileInput
 } from './form-upload-validation.js';
 
-import { sendData } from './api.js';
-import { showError, showSuccess } from './show-alerts.js';
-import { isEscapeKey } from './util.js';
-import { initScale, resetScale } from './scale.js';
-import { initEffects, resetEffects } from './effects.js';
-import { SubmitButtonText } from './constants.js';
 
 // Элементы формы
 const overlay = uploadForm.querySelector('.img-upload__overlay');

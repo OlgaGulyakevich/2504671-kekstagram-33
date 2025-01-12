@@ -45,3 +45,5 @@ function isMeetingWithinWorkHours (workStart, workEnd, meetingStart, meetingDura
     meetingEndMinutes <= workEndMinutes
   );
 }
+
+export { checkTextLength, isPolindrom, extractDigits, isMeetingWithinWorkHours };

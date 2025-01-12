@@ -1,4 +1,3 @@
-
 const commentForm = document.querySelector('.social__footer-form');
 const commentContainer = document.querySelector('.social__comments');
 const commentInput = document.querySelector('.social__footer-text');

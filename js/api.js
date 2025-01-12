@@ -2,7 +2,7 @@ import {
   BASE_URL,
   Route,
   Method,
-  ErrorText } from './constants';
+  ErrorText } from './constants.js';
 
 
 async function load (route, errorText, method = Method.GET, body = null) {
