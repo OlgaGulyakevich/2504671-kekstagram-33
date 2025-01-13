@@ -1,13 +1,3 @@
-export const PHOTO_DATA_COUNT = 25;
-export const PHOTOS_MIN = 1;
-export const PHOTOS_MAX = 25;
-export const LIKES_MIN = 15;
-export const LIKES_MAX = 200;
-export const AVATAR_MIN = 1;
-export const AVATAR_MAX = 6;
-export const COMMENTS_MIN = 0;
-export const COMMENTS_MAX = 30;
-
 export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
 export const Route = {
@@ -27,10 +17,14 @@ export const ErrorText = {
 
 export const ALERT_SHOW_TIME = 5000;
 
+export const DEBOUNCE_TIME = 500;
+
 export const SubmitButtonText = {
   IDLE: 'ОПУБЛИКОВАТЬ',
   SENDING: 'ПУБЛИКУЮ...'
 };
+
+export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
 
 export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -118,6 +112,16 @@ export const EFFECTS = {
     unit: ''
   }
 };
+
+export const PHOTO_DATA_COUNT = 25;
+export const PHOTOS_MIN = 1;
+export const PHOTOS_MAX = 25;
+export const LIKES_MIN = 15;
+export const LIKES_MAX = 200;
+export const AVATAR_MIN = 1;
+export const AVATAR_MAX = 6;
+export const COMMENTS_MIN = 0;
+export const COMMENTS_MAX = 30;
 
 
 export const NAMES = [

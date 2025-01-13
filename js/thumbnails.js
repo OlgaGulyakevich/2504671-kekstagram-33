@@ -1,8 +1,4 @@
 import { onThumbnailClick } from './fullscreen.js';
-import {getData} from './api.js';
-import {showDataError} from './show-alerts.js';
-
-const pictureContainer = document.querySelector('.pictures');
 
 // Создает миниатюру фотографии на основе данных
 const createThumbnail = ({ url, description, likes, comments }) => {
@@ -10,7 +6,6 @@ const createThumbnail = ({ url, description, likes, comments }) => {
     .querySelector('#picture')
     .content.querySelector('.picture');
 
-  // Клонирование шаблона
   const newThumbnail = pictureTemplate.cloneNode(true);
 
   // Настройка изображения
@@ -43,13 +38,4 @@ const renderThumbnails = (container, photos) => {
   container.append(fragment);
 };
 
-async function getPhotos() {
-  try {
-    const data = await getData();
-    renderThumbnails(pictureContainer, data);
-  } catch (error) {
-    showDataError();
-  }
-}
-
-getPhotos();
+export {renderThumbnails};
