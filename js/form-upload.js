@@ -47,6 +47,12 @@ function closeForm() {
 
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  // Удаляем обработчики событий
+  uploadForm.removeEventListener('submit', onFormSubmit);
+  document.removeEventListener('keydown', onEscKeydown);
+  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
+  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
 }
 
 // Открытие формы
@@ -92,12 +98,6 @@ function onFileInputChange() {
 // Кнопка «Закрыть» или нажали Esc
 function onCloseButtonClick() {
   closeForm();
-
-  uploadForm.removeEventListener('submit', onFormSubmit);
-  document.removeEventListener('keydown', onEscKeydown);
-  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
-  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
-  fileInput.removeEventListener('change', onFileInputChange);
 }
 
 function onEscKeydown(evt) {

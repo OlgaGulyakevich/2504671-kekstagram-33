@@ -6,21 +6,23 @@ import { debounce } from './util.js';
 import { initFilters } from './filters.js';
 
 
-// // Точка входа: вызываем все нужные инициализации
 async function initApp() {
   setUploadForm();
 
   try {
     const data = await getData();
     const container = document.querySelector('.pictures');
+    const uploadForm = container.querySelector('.img-upload');
 
     const debouncedRender = debounce((filteredPhotos) => {
       container.innerHTML = '';
+      if (uploadForm) {
+        container.append(uploadForm);
+      }
       renderThumbnails(container, filteredPhotos);
     });
 
     initFilters(data, debouncedRender);
-
     renderThumbnails(container, data);
 
   } catch (error) {
