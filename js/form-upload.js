@@ -19,6 +19,7 @@ const overlay = uploadForm.querySelector('.img-upload__overlay');
 const closeButton = uploadForm.querySelector('#upload-cancel');
 const submitButton = uploadForm.querySelector('#upload-submit');
 const previewImg = document.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 // Блокируем Enter на хэштегах/описании
 function onDataInputsKeydown(evt) {
@@ -86,6 +87,9 @@ function onFileInputChange() {
 
   const imageURL = URL.createObjectURL(file);
   previewImg.src = imageURL;
+  effectsPreviews.forEach((preview) => {
+    preview.style.backgroundImage = `url(${imageURL})`;
+  });
 
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');

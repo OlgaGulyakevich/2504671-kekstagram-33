@@ -616,6 +616,7 @@ main {
   display: block;
   width: 70px;
   height: 70px;
+
   margin-bottom: 5px;
 
   overflow: hidden;
@@ -626,7 +627,7 @@ main {
   background-image: url("../img/upload-default-image.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% auto;
+  background-size: 250% auto;
 
   border: solid 5px transparent;
   border-radius: 5px;

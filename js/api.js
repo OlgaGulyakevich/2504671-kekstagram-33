@@ -20,10 +20,18 @@ async function load (route, errorText, method = Method.GET, body = null) {
   }
 }
 
-const getData = async () => await load(Route.GET_DATA, ErrorText.GET_DATA);
+const getData = () => load(
+  Route.GET_DATA,
+  ErrorText.GET_DATA);
 
-const sendData = async (body) => await load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
+const sendData = (body) => load(
+  Route.SEND_DATA,
+  ErrorText.SEND_DATA,
+  Method.POST, body);
 
-const sendСomments = async (body) => await load(Route.SEND_COMMENTS, ErrorText.SEND_COMMENTS, Method.POST, body);
+const sendComments = (body) => load(
+  Route.SEND_COMMENTS,
+  ErrorText.SEND_COMMENTS,
+  Method.POST, body);
 
-export {getData, sendData, sendСomments};
+export {getData, sendData, sendComments};
