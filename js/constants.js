@@ -2,13 +2,15 @@ export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
 export const Route = {
   GET_DATA: '/data',
-  SEND_COMMENTS: '',
   SEND_DATA: '',
+  SEND_COMMENTS: ''
 };
+
 export const Method = {
   GET: 'GET',
   POST: 'POST',
 };
+
 export const ErrorText = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
@@ -26,7 +28,7 @@ export const SubmitButtonText = {
 
 export const FILE_TYPES = ['jpg', 'jpeg', 'png', 'bmp', 'webp'];
 
-export const MAX_FILE_SIZE = 5 * 1024 * 1024;
+export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5мб
 
 export const COMMENTS_PER_PAGE = 5;
 
@@ -45,9 +47,13 @@ export const HashtagErrorMessages = {
   MAX_COUNT: `Нельзя указать больше ${MAX_HASHTAGS} хэштегов.`
 };
 
-export const FileErrorMessages = {
-  MAX_SIZE: 'Файл слишком большой (максимум 5 мб)',
+export const Filters = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED:'filter-discussed'
 };
+
+export const RANDOM_PHOTO_MAX = 10;
 
 export const SCALE_STEP = 25;
 export const SCALE_MIN = 25;

@@ -39,7 +39,6 @@ function addValidationRules() {
 
 
 function validateForm() {
-  initPristine();
   return pristine.validate();
 }
 
@@ -48,4 +47,4 @@ function resetFormValidation() {
 }
 
 
-export {validateForm, resetFormValidation, uploadForm, hashtagsInput, descriptionInput, fileInput};
+export { initPristine, validateForm, resetFormValidation, uploadForm, hashtagsInput, descriptionInput, fileInput};

@@ -1,10 +1,12 @@
 import { isEscapeKey } from './util.js';
-import { SubmitButtonText } from './constants.js';
+import { SubmitButtonText, FILE_TYPES, MAX_FILE_SIZE } from './constants.js';
 import { sendData } from './api.js';
 import { showError, showSuccess } from './show-alerts.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';
+import { showFileInputError} from './show-alerts.js';
 import {
+  initPristine,
   validateForm,
   resetFormValidation,
   uploadForm,
@@ -13,18 +15,17 @@ import {
   fileInput
 } from './form-upload-validation.js';
 
-
-// Элементы формы
 const overlay = uploadForm.querySelector('.img-upload__overlay');
 const closeButton = uploadForm.querySelector('#upload-cancel');
 const submitButton = uploadForm.querySelector('#upload-submit');
+const previewImg = document.querySelector('.img-upload__preview img');
 
 // Блокируем Enter на хэштегах/описании
 function onDataInputsKeydown(evt) {
   evt.stopPropagation();
 }
 
-// Блокируем кнопку при отправке
+// Блокировка/разблокировка кнопки при отправке
 function blockSubmitButton() {
   submitButton.disabled = true;
   submitButton.textContent = SubmitButtonText.SENDING; // «ПУБЛИКУЮ...»
@@ -50,14 +51,43 @@ function closeForm() {
 
 // Открытие формы
 function openForm() {
-  fileInput.addEventListener('change', () => {
-    overlay.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-
-    initScale();
-    initEffects();
-  });
+  fileInput.addEventListener('change', onFileInputChange);
 }
+
+// Обработчик fileInput — рендерим выбранное изображение
+function onFileInputChange() {
+  initPristine();
+
+  const file = fileInput.files?.[0];
+  if (!file) {
+    return;
+  }
+  // --- Проверка формата файла ---
+  const fileName = file.name.toLowerCase();
+  const isValidType = FILE_TYPES.some((ext) => fileName.endsWith(ext));
+  if (!isValidType) {
+    // showFileInputError();
+    fileInput.value = '';
+    return;
+  }
+
+  // --- Проверка размера ---
+  if (file.size > MAX_FILE_SIZE) {
+    showFileInputError();
+    fileInput.value = '';
+    return;
+  }
+
+  const imageURL = URL.createObjectURL(file);
+  previewImg.src = imageURL;
+
+  overlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  initScale();
+  initEffects();
+}
+
 
 // Кнопка «Закрыть» или нажали Esc
 function onCloseButtonClick() {
@@ -67,6 +97,7 @@ function onCloseButtonClick() {
   document.removeEventListener('keydown', onEscKeydown);
   hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
   descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
+  fileInput.removeEventListener('change', onFileInputChange);
 }
 
 function onEscKeydown(evt) {
@@ -106,6 +137,7 @@ function setUploadForm() {
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onEscKeydown);
 
+  // Блокируем «Enter» внутри хэштегов и описания
   hashtagsInput.addEventListener('keydown', onDataInputsKeydown);
   descriptionInput.addEventListener('keydown', onDataInputsKeydown);
 
@@ -113,4 +145,4 @@ function setUploadForm() {
 }
 
 
-setUploadForm();
+export { setUploadForm };

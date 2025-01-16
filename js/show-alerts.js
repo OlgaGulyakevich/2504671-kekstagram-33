@@ -1,12 +1,10 @@
 import { isEscapeKey } from './util.js';
 import {ALERT_SHOW_TIME} from './constants.js';
 
-
-// Общая логика — «обёртка», куда будем помещать шаблон
+// Общая логика, куда будем помещать шаблон
 function showModal(templateSelector) {
   const template = document.querySelector(templateSelector).content.cloneNode(true);
-  const container = template.querySelector('section'); // error или success
-
+  const container = template.querySelector('section');
   document.body.append(container);
 
   // Функция для скрытия окна
@@ -23,9 +21,8 @@ function showModal(templateSelector) {
     }
   }
 
+  // Если клик вне блока .error__inner или .success__inner
   function onOutsideClick(evt) {
-    // Если клик вне блока .error__inner или .success__inner
-    // проверяем evt.target
     if (!evt.target.closest('.error__inner') && !evt.target.closest('.success__inner')) {
       closeModal();
     }
@@ -46,11 +43,15 @@ function showError() {
   showModal('#error');
 }
 
+// Функция для показа ошибки при выборе файла больше 5мб
+function showFileInputError() {
+  showModal('#file-input-error');
+}
+
 // Функция для показа ошибки при загрузке данных (getData)
 function showDataError() {
   const template = document.querySelector('#data-error').content.cloneNode(true);
   const container = template.querySelector('.data-error');
-
   document.body.append(container);
 
   // Через 5 секунд убираем
@@ -64,4 +65,4 @@ function showSuccess() {
   showModal('#success');
 }
 
-export { showError, showDataError, showSuccess };
+export { showError, showFileInputError, showDataError, showSuccess };
