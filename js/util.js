@@ -1,3 +1,5 @@
+import {DEBOUNCE_TIME} from './constants.js';
+
 // Генерация уникального ID
 const getIdGenerator = () => {
   let id = 0;
@@ -55,6 +57,38 @@ const getDeclineForm = (count, forms) => {
   return forms[2];
 };
 
+// Перемешивание массива (алгоритм Фишера-Йетса)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+  }
+  return array;
+}
+
+
+// Функция debounce для устранения дребезга
+const debounce = (callback, timeoutDelay = DEBOUNCE_TIME) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+// Функция throttle для пропуска кадров
+function throttle (callback, delayBetweenFrames) {
+  let lastTime = 0;
+  return (...rest) => {
+    const now = new Date();
+
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+}
+
 
 export {
   getIdGenerator,
@@ -65,4 +99,7 @@ export {
   toggleElementVisibility,
   clearElement,
   getDeclineForm,
+  shuffleArray,
+  debounce,
+  throttle
 };
