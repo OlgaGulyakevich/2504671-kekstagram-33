@@ -4,7 +4,7 @@ import { sendData } from './api.js';
 import { showError, showSuccess } from './show-alerts.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';
-import { showFileInputError} from './show-alerts.js';
+import { showFileInputError, showFileTypeError } from './show-alerts.js';
 import {
   initPristine,
   validateForm,
@@ -66,7 +66,7 @@ function onFileInputChange() {
   const fileName = file.name.toLowerCase();
   const isValidType = FILE_TYPES.some((ext) => fileName.endsWith(ext));
   if (!isValidType) {
-    // showFileInputError();
+    showFileTypeError();
     fileInput.value = '';
     return;
   }
@@ -115,7 +115,6 @@ async function onFormSubmit(evt) {
   if (!isValid) {
     return;
   }
-
   blockSubmitButton();
   const formData = new FormData(uploadForm);
 

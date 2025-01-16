@@ -5,47 +5,27 @@ import { getData } from './api.js';
 import { debounce } from './util.js';
 import { initFilters } from './filters.js';
 
-// Контейнер, куда рендерим полученные фото с сервера
-const pictureContainer = document.querySelector('.pictures');
 
-async function getPhotos() {
-  try {
-    const data = await getData();
-    const debounceRenderThumbnails = debounce(renderThumbnails);
-    initFilters (data, debounceRenderThumbnails);
-    renderThumbnails(pictureContainer, data);
-  } catch (error) {
-    showDataError();
-  }
-}
-
-getPhotos();
-
-// Точка входа: вызываем все нужные инициализации
+// // Точка входа: вызываем все нужные инициализации
 async function initApp() {
-
-  // 1. Инициализируем форму загрузки своего фото
   setUploadForm();
 
   try {
-    // 2. Запрашиваем данные
     const data = await getData();
+    const container = document.querySelector('.pictures');
 
-    // 3. Подключаем фильтры с debounce
-    const debounceRender = debounce((filtered) => {
-      renderThumbnails(document.querySelector('.pictures'), filtered);
-    }, 500);
+    const debouncedRender = debounce((filteredPhotos) => {
+      container.innerHTML = '';
+      renderThumbnails(container, filteredPhotos);
+    });
 
-    // 4. Инициируем фильтры (передаём raw-данные и коллбэк)
-    initFilters(data, debounceRender);
+    initFilters(data, debouncedRender);
 
-    // 5. Первая отрисовка (все миниатюры без фильтра)
-    renderThumbnails(document.querySelector('.pictures'), data);
+    renderThumbnails(container, data);
 
   } catch (error) {
     showDataError();
   }
 }
 
-// Запуск всего приложения
 initApp();
