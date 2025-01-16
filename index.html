@@ -229,11 +229,21 @@
     </section>
   </template>
 
-  <!-- Сообщение  с ошибкой загрузки изображений (размер больше 5 мб)  -->
+  <!-- Сообщение  с ошибкой загрузки изображения (размер больше 5 мб)  -->
   <template id="file-input-error">
     <section class="error">
       <div class="error__inner">
-        <h2 class="error__title">Файл слишком большой (максимум 5 мб)</h2>
+        <h2 class="error__title">Файл слишком большой, выберите файл размером меньше 5 МБ.</h2>
+        <button type="button" class="error__button">Попробовать ещё раз</button>
+      </div>
+    </section>
+  </template>
+
+  <!-- Сообщение  с ошибкой загрузки изображени недопустимого формата  -->
+  <template id="file-type-error">
+    <section class="error">
+      <div class="error__inner">
+        <h2 class="error__title">Недопустимый формат файла. Разрешены JPG, JPEG, PNG, BMP, WEBP.</h2>
         <button type="button" class="error__button">Попробовать ещё раз</button>
       </div>
     </section>

@@ -4,7 +4,7 @@ import { sendData } from './api.js';
 import { showError, showSuccess } from './show-alerts.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';
-import { showFileInputError} from './show-alerts.js';
+import { showFileInputError, showFileTypeError } from './show-alerts.js';
 import {
   initPristine,
   validateForm,
@@ -47,6 +47,12 @@ function closeForm() {
 
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  // Удаляем обработчики событий
+  uploadForm.removeEventListener('submit', onFormSubmit);
+  document.removeEventListener('keydown', onEscKeydown);
+  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
+  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
 }
 
 // Открытие формы
@@ -66,7 +72,7 @@ function onFileInputChange() {
   const fileName = file.name.toLowerCase();
   const isValidType = FILE_TYPES.some((ext) => fileName.endsWith(ext));
   if (!isValidType) {
-    // showFileInputError();
+    showFileTypeError();
     fileInput.value = '';
     return;
   }
@@ -92,12 +98,6 @@ function onFileInputChange() {
 // Кнопка «Закрыть» или нажали Esc
 function onCloseButtonClick() {
   closeForm();
-
-  uploadForm.removeEventListener('submit', onFormSubmit);
-  document.removeEventListener('keydown', onEscKeydown);
-  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
-  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
-  fileInput.removeEventListener('change', onFileInputChange);
 }
 
 function onEscKeydown(evt) {
@@ -115,7 +115,6 @@ async function onFormSubmit(evt) {
   if (!isValid) {
     return;
   }
-
   blockSubmitButton();
   const formData = new FormData(uploadForm);
 

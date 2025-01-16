@@ -1,13 +1,12 @@
 import { isEscapeKey } from './util.js';
 import {ALERT_SHOW_TIME} from './constants.js';
 
-// Общая логика, куда будем помещать шаблон
+
 function showModal(templateSelector) {
   const template = document.querySelector(templateSelector).content.cloneNode(true);
   const container = template.querySelector('section');
   document.body.append(container);
 
-  // Функция для скрытия окна
   function closeModal() {
     container.remove();
     document.removeEventListener('keydown', onEscKeydown);
@@ -48,6 +47,11 @@ function showFileInputError() {
   showModal('#file-input-error');
 }
 
+// Функция для показа ошибки при выборе неверного формата файла
+function showFileTypeError() {
+  showModal('#file-type-error');
+}
+
 // Функция для показа ошибки при загрузке данных (getData)
 function showDataError() {
   const template = document.querySelector('#data-error').content.cloneNode(true);
@@ -65,4 +69,4 @@ function showSuccess() {
   showModal('#success');
 }
 
-export { showError, showFileInputError, showDataError, showSuccess };
+export { showError, showFileInputError, showFileTypeError, showDataError, showSuccess };
