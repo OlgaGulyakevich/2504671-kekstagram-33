@@ -19,7 +19,7 @@ let loadedComments = [];
 let displayedCommentsCount = 0;
 let isLiked = false;
 
-// Создает один комментарий
+
 const createComment = ({ avatar, name, message }) => {
   const commentTemplate = document
     .querySelector('#comment')
@@ -34,7 +34,6 @@ const createComment = ({ avatar, name, message }) => {
 
   return newComment;
 };
-
 
 //  Отрисовывает одну «порцию» комментариев
 const renderComments = () => {
@@ -64,7 +63,6 @@ const renderComments = () => {
     loadMoreButton.classList.add('hidden');
     return;
   }
-
   // Скрывает кнопку, если все комментарии показаны
   loadMoreButton.classList.toggle('hidden', displayedCommentsCount >= loadedComments.length);
 };
@@ -72,8 +70,15 @@ const renderComments = () => {
 // При клике на лайк (один раз)
 function onLikesClick() {
   if (!isLiked) {
+    // Ставим лайк
     likesCount.textContent = Number(likesCount.textContent) + 1;
+    likesCount.classList.add('likes-count--liked');
     isLiked = true;
+  } else {
+    // Убираем лайк
+    likesCount.textContent = Number(likesCount.textContent) - 1;
+    likesCount.classList.remove('likes-count--liked');
+    isLiked = false;
   }
 }
 
@@ -83,8 +88,8 @@ const fillPhotoData = ({url, likes, description, comments}) => {
   fullscreenPhoto.alt = description;
   photoCaption.textContent = description;
   likesCount.textContent = likes;
-
   totalCommentsCount.textContent = comments.length;
+
   loadedComments = comments;
   displayedCommentsCount = 0;
 
@@ -98,7 +103,6 @@ function onLoadMoreButtonClick(evt) {
   renderComments();
 }
 
-// Клавиша Esc
 function onEscKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -106,24 +110,23 @@ function onEscKeydown(evt) {
   }
 }
 
-
 // Закрывает полноэкранный просмотр фото
 function onCloseButtonClick() {
   toggleElementVisibility(fullscreenBlock, 'hidden');
   toggleElementVisibility(document.body, 'modal-open');
 
-  // Убираем «комментарии»
+  // Убираем комментарии
   destroyComment();
+
+  // Сброс лайка при закрытии
+  likesCount.classList.remove('likes-count--liked');
+  isLiked = false;
 
   loadMoreButton.removeEventListener('click', onLoadMoreButtonClick);
   closeButton.removeEventListener('click', onCloseButtonClick);
   likesCount.removeEventListener('click', onLikesClick);
   document.removeEventListener('keydown', onEscKeydown);
-
-  // Сброс лайка при закрытии
-  isLiked = false;
 }
-
 
 // Открывает полноэкранный просмотр
 function onThumbnailClick(evt, thumbnailData) {
@@ -133,7 +136,6 @@ function onThumbnailClick(evt, thumbnailData) {
   toggleElementVisibility(fullscreenBlock, 'hidden');
   toggleElementVisibility(document.body, 'modal-open');
 
-  // Инициализация формы комментариев
   initComment();
 
   loadMoreButton.addEventListener('click', onLoadMoreButtonClick);

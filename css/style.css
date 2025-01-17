@@ -907,6 +907,15 @@ main {
   background-position: -5px -81px;
 }
 
+.likes-count--liked {
+  color: #e90000;
+}
+
+.likes-count--liked::before {
+  opacity: 1;
+  background-position: -5px -81px;
+}
+
 
 /*
  * Комментарии к изображению

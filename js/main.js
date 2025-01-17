@@ -11,6 +11,7 @@ async function initApp() {
 
   try {
     const data = await getData();
+
     const container = document.querySelector('.pictures');
     const uploadForm = container.querySelector('.img-upload');
 

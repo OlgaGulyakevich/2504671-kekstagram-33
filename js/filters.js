@@ -1,7 +1,10 @@
 import {Filters, RANDOM_PHOTO_MAX} from './constants.js';
 import {shuffleArray, debounce} from './util.js';
 
-// Функция, сортирующая массив фотографий
+const filtersContainer = document.querySelector('.img-filters');
+const filtersForm = filtersContainer.querySelector('.img-filters__form');
+const filtersButtons = filtersForm.querySelectorAll('.img-filters__button');
+
 function getFilteredPhotos(photos, filterType) {
   switch (filterType) {
 
@@ -15,18 +18,14 @@ function getFilteredPhotos(photos, filterType) {
     }
 
     case Filters.DISCUSSED:
-      return [...photos].sort((a, b) => b.comments.length - a.comments.length);
+      return [...photos].sort((commentA, commentB) => commentB.comments.length - commentA.comments.length);
 
     default:
       return [...photos];
   }
 }
 
-// Инициализация фильтров
 function initFilters(photos, cb) {
-  const filtersContainer = document.querySelector('.img-filters');
-  const filtersForm = filtersContainer.querySelector('.img-filters__form');
-
   filtersContainer.classList.remove('img-filters--inactive');
 
   filtersForm.addEventListener('click', debounce((evt) => {
@@ -34,7 +33,7 @@ function initFilters(photos, cb) {
       return;
     }
 
-    filtersForm.querySelectorAll('.img-filters__button').forEach((button) => {
+    filtersButtons.forEach((button) => {
       button.classList.remove('img-filters__button--active');
     });
     evt.target.classList.add('img-filters__button--active');

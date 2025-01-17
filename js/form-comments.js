@@ -8,7 +8,6 @@ let pristine;
 
 function initComment() {
 
-  // Инициализируем Pristine
   const pristineConfig = {
     classTo: 'social__footer-form',
     errorTextParent: 'social__footer-form',
@@ -47,7 +46,7 @@ function onCommentFormSubmit(evt) {
   newComment.querySelector('.social__picture').src = 'img/avatar-6.svg';
   newComment.querySelector('.social__text').textContent = text;
 
-  // Опционально: кнопка «Удалить»
+  // Кнопка «Удалить»
   const deleteBtn = document.createElement('button');
   deleteBtn.classList.add('social__comment-delete');
   deleteBtn.textContent = 'Удалить';
