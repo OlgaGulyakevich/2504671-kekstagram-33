@@ -43,8 +43,8 @@ function showError() {
 }
 
 // Функция для показа ошибки при выборе файла больше 5мб
-function showFileInputError() {
-  showModal('#file-input-error');
+function showFileSizeError() {
+  showModal('#file-size-error');
 }
 
 // Функция для показа ошибки при выборе неверного формата файла
@@ -69,4 +69,4 @@ function showSuccess() {
   showModal('#success');
 }
 
-export { showError, showFileInputError, showFileTypeError, showDataError, showSuccess };
+export { showError, showFileSizeError, showFileTypeError, showDataError, showSuccess };

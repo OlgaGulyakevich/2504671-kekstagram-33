@@ -3,7 +3,6 @@ export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 export const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
-  SEND_COMMENTS: ''
 };
 
 export const Method = {
@@ -14,7 +13,6 @@ export const Method = {
 export const ErrorText = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
-  SEND_COMMENTS: 'Не удалось отправить комментарий. Попробуйте ещё раз',
 };
 
 export const ALERT_SHOW_TIME = 5000;

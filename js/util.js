@@ -35,12 +35,7 @@ const clearElement = (element) => {
   element.innerHTML = '';
 };
 
-/**
- * Функция склонения слов в зависимости от числительного
- * @param {number} count - Число, для которого нужно склонить слово
- * @param {Array} forms - Массив форм слова [1, 2-4, 5-0]
- * @returns {string}  - Правильная форма слова
- */
+// Функция склонения слов в зависимости от числительного
 const getDeclineForm = (count, forms) => {
   const mod10 = count % 10;
   const mod100 = count % 100;
@@ -65,7 +60,6 @@ function shuffleArray(array) {
   }
   return array;
 }
-
 
 // Функция debounce для устранения дребезга
 const debounce = (callback, timeoutDelay = DEBOUNCE_TIME) => {

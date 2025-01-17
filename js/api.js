@@ -29,9 +29,4 @@ const sendData = (body) => load(
   ErrorText.SEND_DATA,
   Method.POST, body);
 
-const sendComments = (body) => load(
-  Route.SEND_COMMENTS,
-  ErrorText.SEND_COMMENTS,
-  Method.POST, body);
-
-export {getData, sendData, sendComments};
+export {getData, sendData};

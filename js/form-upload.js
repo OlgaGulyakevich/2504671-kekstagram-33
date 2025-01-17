@@ -4,7 +4,7 @@ import { sendData } from './api.js';
 import { showError, showSuccess } from './show-alerts.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, resetEffects } from './effects.js';
-import { showFileInputError, showFileTypeError } from './show-alerts.js';
+import { showFileSizeError, showFileTypeError } from './show-alerts.js';
 import {
   initPristine,
   validateForm,
@@ -21,23 +21,36 @@ const submitButton = uploadForm.querySelector('#upload-submit');
 const previewImg = document.querySelector('.img-upload__preview img');
 const effectsPreviews = document.querySelectorAll('.effects__preview');
 
-// Блокируем Enter на хэштегах/описании
-function onDataInputsKeydown(evt) {
-  evt.stopPropagation();
+// Проверяем, не находится ли фокус в полях ввода
+function isInputFocused() {
+  return document.activeElement === hashtagsInput ||
+         document.activeElement === descriptionInput;
 }
 
-// Блокировка/разблокировка кнопки при отправке
+function onDataInputsKeydown(evt) {
+  if (isEscapeKey(evt) && isInputFocused()) {
+    evt.stopPropagation();
+  }
+}
+
 function blockSubmitButton() {
   submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING; // «ПУБЛИКУЮ...»
+  submitButton.textContent = SubmitButtonText.SENDING;
 }
 
 function unblockSubmitButton() {
   submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDLE; // «ОПУБЛИКОВАТЬ»
+  submitButton.textContent = SubmitButtonText.IDLE;
 }
 
-// Закрытие формы (возврат к исходному состоянию)
+function removeEventListeners() {
+  closeButton.removeEventListener('click', onCloseButtonClick);
+  document.removeEventListener('keydown', onEscKeydown);
+  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
+  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
+  uploadForm.removeEventListener('submit', onFormSubmit);
+}
+
 function closeForm() {
   resetFormValidation();
   uploadForm.reset();
@@ -49,27 +62,25 @@ function closeForm() {
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  // Удаляем обработчики событий
-  uploadForm.removeEventListener('submit', onFormSubmit);
-  document.removeEventListener('keydown', onEscKeydown);
-  hashtagsInput.removeEventListener('keydown', onDataInputsKeydown);
-  descriptionInput.removeEventListener('keydown', onDataInputsKeydown);
+  removeEventListeners();
 }
 
-// Открытие формы
-function openForm() {
-  fileInput.addEventListener('change', onFileInputChange);
+function addEventListeners() {
+  closeButton.addEventListener('click', onCloseButtonClick);
+  document.addEventListener('keydown', onEscKeydown);
+  hashtagsInput.addEventListener('keydown', onDataInputsKeydown);
+  descriptionInput.addEventListener('keydown', onDataInputsKeydown);
+  uploadForm.addEventListener('submit', onFormSubmit);
 }
 
-// Обработчик fileInput — рендерим выбранное изображение
 function onFileInputChange() {
-  initPristine();
+  previewImg.src = '';
 
   const file = fileInput.files?.[0];
   if (!file) {
     return;
   }
-  // --- Проверка формата файла ---
+
   const fileName = file.name.toLowerCase();
   const isValidType = FILE_TYPES.some((ext) => fileName.endsWith(ext));
   if (!isValidType) {
@@ -78,9 +89,8 @@ function onFileInputChange() {
     return;
   }
 
-  // --- Проверка размера ---
   if (file.size > MAX_FILE_SIZE) {
-    showFileInputError();
+    showFileSizeError();
     fileInput.value = '';
     return;
   }
@@ -91,27 +101,30 @@ function onFileInputChange() {
     preview.style.backgroundImage = `url(${imageURL})`;
   });
 
+  window.addEventListener('load', () => {
+    URL.revokeObjectURL(imageURL);
+  }, { once: true });
+
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   initScale();
   initEffects();
+  initPristine();
+  addEventListeners();
 }
 
-
-// Кнопка «Закрыть» или нажали Esc
 function onCloseButtonClick() {
   closeForm();
 }
 
 function onEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !isInputFocused()) {
     evt.preventDefault();
-    onCloseButtonClick();
+    closeForm();
   }
 }
 
-// Обработка отправки формы (submit)
 async function onFormSubmit(evt) {
   evt.preventDefault();
 
@@ -119,13 +132,14 @@ async function onFormSubmit(evt) {
   if (!isValid) {
     return;
   }
+
   blockSubmitButton();
   const formData = new FormData(uploadForm);
 
   try {
     await sendData(formData);
-    showSuccess();
     closeForm();
+    showSuccess();
   } catch (err) {
     showError();
   } finally {
@@ -133,19 +147,8 @@ async function onFormSubmit(evt) {
   }
 }
 
-// Инициализация всей логики формы
 function setUploadForm() {
-  openForm();
-
-  closeButton.addEventListener('click', onCloseButtonClick);
-  document.addEventListener('keydown', onEscKeydown);
-
-  // Блокируем «Enter» внутри хэштегов и описания
-  hashtagsInput.addEventListener('keydown', onDataInputsKeydown);
-  descriptionInput.addEventListener('keydown', onDataInputsKeydown);
-
-  uploadForm.addEventListener('submit', onFormSubmit);
+  fileInput.addEventListener('change', onFileInputChange);
 }
-
 
 export { setUploadForm };
